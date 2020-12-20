@@ -46,7 +46,7 @@ if(isset($_POST['comment_content']))
             }                                
     }
 }
-$db = mysqli_connect('localhost', 'root', 'root', 'camagru');
+$db = mysqli_connect('mysql', 'root', 'tiger', 'camagru');
 $results = mysqli_query($db, "SELECT * FROM cmnt WHERE img_id = '$image_id' ORDER BY `date` DESC");
 $comments = mysqli_fetch_all($results, MYSQLI_ASSOC);
 ?>

@@ -12,7 +12,7 @@ if(!isset($_SESSION['user']))
 
 
 <?php
-$db = mysqli_connect('localhost', 'root', 'root', 'camagru');
+$db = mysqli_connect('mysql', 'root', 'tiger', 'camagru');
 $results = mysqli_query($db, "SELECT * FROM images WHERE username='$s' ORDER BY id DESC LIMIT 3");
 $images = mysqli_fetch_all($results, MYSQLI_ASSOC);
 ?>

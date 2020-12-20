@@ -4,7 +4,7 @@ if($_POST['username'] && $_POST['email'] && $_POST['passwd'])
     $user = trim(strtolower($_POST['username']));
     $email = trim($_POST['email']);
     $passwd = sha1($_POST['passwd']);
-    $db = mysqli_connect('localhost', 'root', 'root', 'camagru');
+    $db = mysqli_connect('mysql', 'root', 'tiger', 'camagru');
     $sql_u = "SELECT * FROM users WHERE username='$user'";
   	$sql_e = "SELECT * FROM users WHERE email='$email'";
   	$res_u = mysqli_query($db, $sql_u);

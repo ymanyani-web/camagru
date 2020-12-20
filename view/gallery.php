@@ -2,7 +2,7 @@
 session_start();
 
     $images_per_page = 10;
-    $db = mysqli_connect('localhost', 'root', 'root', 'camagru');
+    $db = mysqli_connect('mysql', 'root', 'tiger', 'camagru');
     $sql = "SELECT * FROM images";
     $result = mysqli_query($db, $sql);
     $number_of_images = mysqli_num_rows($result);

@@ -56,7 +56,7 @@ if(isset($_POST['user']) || isset($_POST['email']))
     include     'connect_db.php';
     $user = $_POST['user'];
     $email = $_POST['email'];
-    $db = mysqli_connect('localhost', 'root', 'root', 'camagru');
+    $db = mysqli_connect('mysql', 'root', 'tiger', 'camagru');
     $sql_u = "SELECT * FROM users WHERE username='$user'";
   	$sql_e = "SELECT * FROM users WHERE email='$email'";
   	$res_u = mysqli_query($db, $sql_u);

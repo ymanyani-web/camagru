@@ -1,7 +1,7 @@
 <?php
     try
     {
-        $bdd = new PDO('mysql:host=localhost;dbname=camagru;charset=utf8', 'root', 'root');
+        $bdd = new PDO('mysql:host=mysql;dbname=camagru;charset=utf8', 'root', 'tiger');
     }
     catch (Exception $e)
     {
