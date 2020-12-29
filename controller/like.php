@@ -3,7 +3,7 @@ session_start();
 $s = $_SESSION['user'];
 $id = $_GET['idd'];
 include     'connect_db.php';
-$conn = mysqli_connect("mysql","root","tiger","camagru");
+$conn = mysqli_connect("database","root","tiger","camagru");
     
 
     $sql_u = "SELECT * FROM `like_count` WHERE user='$s' AND id_liked_img='$id'";
