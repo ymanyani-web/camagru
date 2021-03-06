@@ -1,4 +1,5 @@
 @import url(font-awesome.min.css);
+@import url("https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600");
 
 
 /* Reset */
@@ -48,6 +49,16 @@
 
 /* Basic */
 
+
+
+	@media screen and (max-width: 480px) {
+
+		html, body {
+			min-width: 100%;
+			min-height: 100%;
+		}
+
+	}
 
 	body {
 		background: #fff;
@@ -145,11 +156,25 @@
 		font-size: 2em;
 	}
 
+		@media screen and (max-width: 480px) {
+
+			h1 {
+				font-size: 1.5em;
+			}
+
+		}
 
 	h2 {
 		font-size: 1.75em;
 	}
 
+		@media screen and (max-width: 480px) {
+
+			h2 {
+				font-size: 1.4em;
+			}
+
+		}
 
 	h3 {
 		font-size: 1.35em;
@@ -178,7 +203,7 @@
 		padding: 1.5em;
 	}
 
-
+		
 
 /* Button */
 
@@ -191,6 +216,7 @@
 		-webkit-appearance: none;
 		-ms-appearance: none;
 		appearance: none;
+		
 		background: #19B5FE;
 		color: #FFF;
 		border-radius: 4px;
@@ -269,6 +295,19 @@
 					margin-right: 2.5%;
 				}
 
+		@media screen and (max-width: 980px) {
+
+			form .field.half {
+				display: block;
+				width: 100%;
+			}
+
+				form .field.half.first {
+					margin-right: 0;
+				}
+
+		}
+
 
 
 	input[type="text"],
@@ -310,6 +349,7 @@
 			border: solid 1px #19B5FE;
 		}
 
+
 	input[type="text"],
 	input[type="password"],
 	input[type="email"],
@@ -338,6 +378,8 @@
 			font-weight: normal;
 			text-transform: none !important;
 		}
+
+
 
 
 
@@ -417,7 +459,15 @@
 						color: #19B5FE;
 					}
 
+				@media screen and (max-width: 736px) {
 
+					#nav ul li {
+						width: 3.4em;
+					}
+
+				}
+
+/* Banner                    first page index.html              */
 
 	body.is-loading #banner > .inner {
 		opacity: 0;
@@ -511,6 +561,29 @@
 			text-decoration: none;
 		}
 
+		@media screen and (max-width: 1280px) {
+
+			#banner h1 {
+				font-size: 3.5em;
+			}
+
+		}
+
+		@media screen and (max-width: 736px) {
+
+			#banner {
+				background-attachment: scroll;
+			}
+
+				#banner h1 {
+					font-size: 2.25em;
+				}
+
+				#banner p {
+					font-size: 1.25em;
+				}
+
+		}
 
 /* Main */
 
@@ -532,6 +605,22 @@
 				font-size: 1em;
 			}
 
+			@media screen and (max-width: 980px) {
+
+				#main #header {
+					padding: 1.15em 2em;
+				}
+
+			}
+
+			@media screen and (max-width: 736px) {
+
+				#main #header {
+					text-align: center;
+				}
+
+			}
+
 /* Footer */
 
 	#footer {
@@ -546,7 +635,38 @@
 			padding: 0 1em;
 			text-align: center;
 		}
- */
+
+		@media screen and (max-width: 736px) {
+
+			#footer {
+				padding: 3em 0 1em 0;
+			}
+
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /* ###################################### gallery pic abc ############################### */
@@ -588,7 +708,7 @@
 	margin-bottom: 100px;
 }
 .ttt{
-	height: 101.8em;
+	height: 89.6em;
 }
 .g{
 	display: inline-block;
@@ -626,9 +746,8 @@
 	padding-right: 5px;
 	border-color: #000;
 	border-style: solid;
-  	border-width: 2px;
+	border-width: 2px;
 }
-
 .filter
 {
 	position: absolute;
@@ -641,18 +760,36 @@
 	top: 180px;
 	left: 65px;
 }
-
-
 .filterr
 {
 	position: absolute;
 	top: 720px;
 	left: 130px;
 }
-
 .filterrr
 {
 	position: absolute;
 	top: 690px;
 	left: 75px;
+}
+
+
+.gallery {
+	padding: 3.5em;
+	position: relative;
+	overflow: hidden;
+	min-height: 37em;
+}
+
+
+
+#main{
+	min-width: 851px;
+}
+.page-wrap
+{
+	min-width: 906px;
+}
+body{
+	min-width: 876px;
 }

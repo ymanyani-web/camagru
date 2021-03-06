@@ -15,47 +15,61 @@
             $s = $donnees['MAX(num)'] + 1;
         else
             $s = 1;
-
-        if($_FILES['webcam']['type'] == "image/jpeg")
+        if ($_FILES['webcam']['size'] > 0)
         {
-            move_uploaded_file($_FILES['webcam']['tmp_name'], "../img/$n-$s.jpg");
-            $path= "../img/$n-$s.jpg";
-            #####################################################  MERGE  ############################################
-            if($filter == '1' || $filter == '2' || $filter == '3')
+            if($_FILES['webcam']['type'] == "image/jpeg")
             {
-                $im = imagecreatefromjpeg($path);
-                $alpha = imagecreatefrompng('../img/alpha/'.$filter.'.png');
-                imagecopymerge_alpha($im, $alpha, 0, 0, 0, 0, imagesx($alpha), imagesy($alpha), 100);
-                imagepng($im,  $path);
-                imagedestroy($im); 
+                if(move_uploaded_file($_FILES['webcam']['tmp_name'], "../img/$n-$s.jpg")){
+                    echo "good";
+                }
+                else{
+                    echo "noo";
+                }
+                $path= "../img/$n-$s.jpg";
+                #####################################################  MERGE  ############################################
+                if($filter == '1' || $filter == '2' || $filter == '3')
+                {
+                    $im = imagecreatefromjpeg($path);
+                    $alpha = imagecreatefrompng('../img/alpha/'.$filter.'.png');
+                    imagecopymerge_alpha($im, $alpha, 0, 0, 0, 0, imagesx($alpha), imagesy($alpha), 100);
+                    imagepng($im,  $path);
+                    imagedestroy($im); 
+                }
+                ###########################################################################################################
             }
-            ###########################################################################################################
-        }
 
-        if($_FILES['webcam']['type'] == "image/png")
-        {
-            move_uploaded_file($_FILES['webcam']['tmp_name'], "../img/$n-$s.png");
-            $path= "../img/$n-$s.png";
-            ##################################################   MERGE   ############################################
-            if($filter == '1' || $filter == '2' || $filter == '3')
+            if($_FILES['webcam']['type'] == "image/png")
             {
-                $im = imagecreatefrompng($path);
-                $alpha = imagecreatefrompng('../img/alpha/'.$filter.'.png');
-                imagecopymerge_alpha($im, $alpha, 0, 0, 0, 0, imagesx($alpha), imagesy($alpha), 100);
-                imagepng($im,  $path);
-                imagedestroy($im); 
+                if(move_uploaded_file($_FILES['webcam']['tmp_name'], "../img/$n-$s.png")){
+                    echo "good";
+                }
+                else{
+                    echo "noo";
+                }
+                $path= "../img/$n-$s.png";
+                ##################################################   MERGE   ############################################
+                if($filter == '1' || $filter == '2' || $filter == '3')
+                {
+                    $im = imagecreatefrompng($path);
+                    $alpha = imagecreatefrompng('../img/alpha/'.$filter.'.png');
+                    imagecopymerge_alpha($im, $alpha, 0, 0, 0, 0, imagesx($alpha), imagesy($alpha), 100);
+                    imagepng($im,  $path);
+                    imagedestroy($im); 
+                }
+                ###########################################################################################################
             }
-            ###########################################################################################################
-        }
 
-        $req = $bdd->prepare('INSERT INTO images(username, `image`, num, like_n) VALUES(:username, :img, :num, :like_n)');
-        $req->execute(array(
-            'username' => $n,
-            'img' => $path,
-            'num' => $s,
-            'like_n' => "0",
-        ));
-        echo '<script> window.location.replace("../view/gallery.php");</script>';
+            $req = $bdd->prepare('INSERT INTO images(username, `image`, num, like_n) VALUES(:username, :img, :num, :like_n)');
+            $req->execute(array(
+                'username' => $n,
+                'img' => $path,
+                'num' => $s,
+                'like_n' => "0",
+            ));
+            echo '<script> window.location.replace("../view/gallery.php");</script>';
+        }
+        else
+            echo '<script> window.location.replace("../view/profile.php?error=1");</script>';
     }
 return 'OK';
 ?>
@@ -71,7 +85,6 @@ return 'OK';
 
 <?php
 function imagecopymerge_alpha($dst_im, $src_im, $dst_x, $dst_y, $src_x, $src_y, $src_w, $src_h, $pct){
-    // function patch for respecting alpha work find on http://php.net/manual/fr/function.imagecopymerge.php
     $cut = imagecreatetruecolor($src_w, $src_h);
     imagecopy($cut, $dst_im, 0, 0, $dst_x, $dst_y, $src_w, $src_h);
     imagecopy($cut, $src_im, 0, 0, $src_x, $src_y, $src_w, $src_h);

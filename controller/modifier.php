@@ -56,7 +56,7 @@ if(isset($_POST['user']) || isset($_POST['email']))
     include     'connect_db.php';
     $user = $_POST['user'];
     $email = $_POST['email'];
-    $db = mysqli_connect('database', 'root', 'tiger', 'camagru');
+    $url = $_POST['url'];
     $sql_u = "SELECT * FROM users WHERE username='$user'";
   	$sql_e = "SELECT * FROM users WHERE email='$email'";
   	$res_u = mysqli_query($db, $sql_u);
@@ -111,7 +111,7 @@ if(isset($_POST['user']) || isset($_POST['email']))
                     'user' => $_SESSION['user']
                     ));
                     require('db.php');
-                    send_mail1($_SESSION['user'], $email);
+                    send_mail1($_SESSION['user'], $email, $url);
                     session_destroy(); 
                     echo '<script> window.location.replace("../view/sign-in.php?t=3");</script>';
             }

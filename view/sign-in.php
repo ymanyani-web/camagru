@@ -36,7 +36,7 @@ if(!empty($_SESSION['user']))
 								</header>
 								<form action="../controller/check.php" method="post">
 									<span class="fa fa-user" aria-hidden="true"></span>
-									<input type="text" id="usr" name="username" placeholder="Username.." maxlength="60" required>
+									<input type="text" id="usr" name="username" placeholder="Username.." maxlength="60"  pattern="[^'\x22]+" required>
 									<span class="fa fa-key" aria-hidden="true"></span>
 									<input type="password" name="passwd" placeholder="Password" maxlength="60" required></br>
 									<input id="saveForm" name="signin-btn" type="submit" value="Sign in" />
@@ -44,14 +44,14 @@ if(!empty($_SESSION['user']))
 										if(isset($msg))
 											echo $msg;
 										if($_GET['t'] == "1")
-											echo "ur password has been modified, log in!!";
+											echo "your password has been modified, log in!!";
 										if($_GET['t'] == "2")
-											echo "ur username has been modified, log in!!";
+											echo "your username has been modified, log in!!";
 										if($_GET['t'] == "3")
-											echo "ur email has been modified, check ur email before log in!!";
+											echo "your email has been modified, check your email before log in!!";
 									?>
 								</form>
-								<br><a href='../view/forgot.php' target="_blank" >Forgotten account?</a></br>
+								<br><a href='../view/forgot.php'  >Forgotten account?</a></br>
 								<a  href='../view/sign-up.php'>sign up</a>
 							</div>	
 							<div id="continue-to-gallery"><a  href='../view/gallery.php'>Continue without sign up</a></div>

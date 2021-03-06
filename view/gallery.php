@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-    $images_per_page = 10;
-    $db = mysqli_connect('database', 'root', 'tiger', 'camagru');
+    $images_per_page = 5;
+    include     '../controller/connect_db.php';
     $sql = "SELECT * FROM images";
     $result = mysqli_query($db, $sql);
     $number_of_images = mysqli_num_rows($result);
@@ -94,7 +94,7 @@ session_start();
                                 if ($page == 1)
                                 {
                                     $page++;
-                                    if($r == 10)
+                                    if($r == 5)
                                     echo '<a href="gallery.php?page=' . $page . '">' . '<img src="../img/alpha/next.png" class="next">' . '</a> '; 
                                 }
                                 elseif ($page >1)
@@ -102,7 +102,7 @@ session_start();
                                     $page_moins = $page - 1;
                                     $page_plus = $page + 1;
                                     echo '<a href="gallery.php?page=' . $page_moins . '">' . '<img src="../img/alpha/prev.png" class="prev">' . '</a> '; 
-                                    if($r == 10)
+                                    if($r == 5)
                                     echo '<a href="gallery.php?page=' . $page_plus . '">' . '<img src="../img/alpha/next.png" class="next">' . '</a> '; 
                                 }
                             ?>

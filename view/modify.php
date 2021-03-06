@@ -63,7 +63,7 @@ else
                                     <!--username-->
                                     <h2>username</h2>
                                     <span class="fa fa-user" aria-hidden="true"></span>
-                                    <input type="text" name="user" placeholder="<?php echo $donnees['username']?>" maxlength="20">
+                                    <input type="text" name="user" placeholder="<?php echo $donnees['username']?>" pattern="[^'\x22]+" maxlength="20">
                                     <!--email-->
                                     <h2>email</h2>
                                     <span class="fa fa-envelope-o" aria-hidden="true"></span>
@@ -73,13 +73,14 @@ else
                                         if($donnees['random'] == "0999")
                                         {
                                     ?>
-                                            <h3>u have to validate ur email<h3>
+                                            <h3>you have to validate your email<h3>
                                     <?php
                                         }
                                     ?>
                                     <!--OK-->
                                     </br><input id="saveForm" name="signin-btn" type="submit" value="Modify" />
                                     <p><?php echo $msg; ?></p>
+                                    <input type="hidden" name="url" value="<?php echo $_SERVER['HTTP_HOST']?>"></br>
                                 </form>
                             </div>
                                     </br>

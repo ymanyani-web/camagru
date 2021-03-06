@@ -1,3 +1,10 @@
+<?php
+session_start();
+if(!empty($_SESSION['user']))
+{
+    header('Location: ../view/gallery.php');
+}
+?>
 <!DOCTYPE HTML>
 
 <html>
@@ -25,16 +32,24 @@
 						<section id="al">
 							<div id="log">
 								<header>
-									<h1>Enter your email to reset your password</h1>
+									<h1>New password</h1>
 								</header>
-								<form action="../controller/f.php" method="post">
-									<span class="fa fa-envelope" aria-hidden="true"></span>
-									<input type="email"  name="email" placeholder="Email.." required><br>
-									<input type="hidden" name="url" value="<?php echo $_SERVER['HTTP_HOST']?>"></br>
-									<input id="saveForm" name="signin-btn" type="submit" value="Reset" />
+								<form action="../controller/reset.php" method="post">
+									<!--password-->
+										<span class="fa fa-key" aria-hidden="true"></span>
+										<input type="password" name="passwd"  id="psw" placeholder="New Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" maxlength="40" required>
+									<!--password1-->
+										<span class="fa fa-key" aria-hidden="true"></span>
+										<input type="password" name="passwd1" placeholder="Retype Password" required maxlength="40"></br>
+										<input type="hidden" name="email" value="<?php echo $_GET['email'];?>"></br>
+									<!--ok-->
+                                        <?php if($_GET['error'] == 1)
+                                        {
+                                            echo "<h1>password non identique, retry</h1>";
+                                        }?>
+										<input id="saveForm" name="signin-btn" type="submit" value="Sign up" />
 								</form>
 							</div>	
-							<div id="continue-to-gallery"><a  href='../view/gallery.php'>Continue without sign up</a></div>
 						</section>
 
 					<!-- Contact -->

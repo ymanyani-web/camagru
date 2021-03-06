@@ -1,23 +1,18 @@
 (function(window) {
     var _userMedia;
 
-    
     function WebcamError() {
         var temp = Error.apply(this, arguments);
         temp.name = this.name = "WebcamError";
         this.stack = temp.stack;
         this.message = temp.message;
     }
-
-    var Webcam = {
-        version: '1.0.26',
-        
+    var Webcam = {        
         // globals
         protocol: location.protocol.match(/https/i) ? 'https' : 'http',
         //loaded: false,    true when webcam movie finishes loading
         //live: false,      true when webcam is initialized and ready to snap
         userMedia: true, // true when getUserMedia is supported natively
-    
         params: {
             width: 0,
             height: 0,
@@ -27,12 +22,7 @@
             jpeg_quality: 900,      // jpeg image quality from 0 (worst) to 100 (best)∂ß
         },
     
-        errors: {
-            WebcamError: WebcamError
-        },
-        
-        hooks: {}, // callback hook functions
-        
+    
         init: function() {
             // initialize, check for getUserMedia support
             var self = this;
@@ -57,12 +47,12 @@
             }
             
             // Make sure media stream is closed when navigating away from page
-            if (this.userMedia) {
-                window.addEventListener( 'beforeunload', function(event) {
-                    self.reset();
-                } );
-            }
         },
+
+        
+
+
+
         
         attach: function(elem) {
             // create webcam preview and attach to DOM element

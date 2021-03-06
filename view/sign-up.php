@@ -38,7 +38,7 @@ if(!empty($_SESSION['user']))
 								<form action="../controller/add.php" method="post">
 									<!--username-->
 										<span class="fa fa-user" aria-hidden="true"></span>
-										<input type="text" name="username" placeholder="Username.."  maxlength="20" required>
+										<input type="text" name="username" placeholder="Username.."  maxlength="20" pattern="[^'\x22]+" required>
 									<!--email-->
 										<span class="fa fa-envelope" aria-hidden="true"></span>
 										<input type="email" name="email" placeholder="email.." maxlength="60" required>
@@ -48,6 +48,7 @@ if(!empty($_SESSION['user']))
 									<!--password1-->
 										<span class="fa fa-key" aria-hidden="true"></span>
 										<input type="password" name="passwd1" placeholder="Retype Password" required maxlength="40"></br>
+										<input type="hidden" name="url" value="<?php echo $_SERVER['HTTP_HOST']?>"></br>
 									<!--ok-->
 										<input id="saveForm" name="signin-btn" type="submit" value="Sign up" />
 								</form>

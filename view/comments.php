@@ -4,7 +4,7 @@ if (empty($_SESSION['user']))
 {
     ?>
     <script>
-        alert('ur not allowed');
+        alert('you are not allowed');
         window.history.back();
     </script>
     <?php
@@ -40,13 +40,14 @@ if(isset($_POST['comment_content']))
             if($dd['cmnt-mail'] == '1')
             {
                 $email = $dd['email'];
+                $url = $_SERVER['HTTP_HOST'];
                 require('../controller/db.php');
-                send_mail_cmnt($usr, $email, $usr_c, $image_id);
+                send_mail_cmnt($usr, $email, $usr_c, $image_id, $url);
                 header("Location: comments.php?imageid=$image_id");
             }                                
     }
 }
-$db = mysqli_connect('database', 'root', 'tiger', 'camagru');
+include     '../controller/connect_db.php';
 $results = mysqli_query($db, "SELECT * FROM cmnt WHERE img_id = '$image_id' ORDER BY `date` DESC");
 $comments = mysqli_fetch_all($results, MYSQLI_ASSOC);
 ?>
@@ -87,7 +88,7 @@ $comments = mysqli_fetch_all($results, MYSQLI_ASSOC);
                                     <a class="#" href="my_profile.php?user=<?php echo $usr; ?>" style="color: #47FF13;"><?php echo $usr; ?></a></br>
                                     <img src="<?php echo '../img/' . $donnes['image'] ?>" width="450px"  alt="">
                                 </div>
-                                    <form method="POST" id="comment_form">
+                                    <form method="POST" id="comment_form" onsubmit='disableButton()'>
                                         <input type="hidden" name="comment_sender" id="comment_sender" value="<?php echo $_SESSION['user'] ?>"/>
                                         <textarea name="comment_content" id="comment_content"  placeholder="Enter Comment" rows="5" style="height:50px; width :450px;" maxlength="255" minlength="1"></textarea>
                                         <input type="hidden" name="image_id" id="image_id" value="<?php echo $image_id ?>" />
@@ -107,7 +108,13 @@ $comments = mysqli_fetch_all($results, MYSQLI_ASSOC);
                                  </div>
                             <?php endforeach; ?>
 						</section>
-
+                        <script>
+    function disableButton() {
+        var btn = document.getElementById('submit');
+        btn.disabled = true;
+        btn.innerText = 'Posting...'
+    }
+</script>
 
 
 					<!-- Footer -->

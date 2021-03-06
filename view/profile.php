@@ -3,16 +3,20 @@ session_start();
 $s = $_SESSION['user'];
 if(!isset($_SESSION['user']))
 {
-    echo "<script type='text/javascript'>alert('only members are allowed to access to this page, log in if u re or sign up if ur not!');</script>";
+    echo "<script type='text/javascript'>alert('only members are allowed to access to this page, log in if you are a member or sign up if you're not!');</script>";
     //require('../index.php');
     //
     ?><script> window.history.back();</script><?php
+}
+if(isset($_GET['error']) )
+{
+    echo "<script type='text/javascript'>alert('it's not a image');</script>";
 }
 ?>
 
 
 <?php
-$db = mysqli_connect('database', 'root', 'tiger', 'camagru');
+include     '../controller/connect_db.php';
 $results = mysqli_query($db, "SELECT * FROM images WHERE username='$s' ORDER BY id DESC LIMIT 3");
 $images = mysqli_fetch_all($results, MYSQLI_ASSOC);
 ?>
@@ -27,6 +31,7 @@ $images = mysqli_fetch_all($results, MYSQLI_ASSOC);
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="stylesheet" href="../assets/css/main.css" />
         <script type="text/javascript" src="../assets/js/webcam.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     </head>
     <style>
             .grid { 
@@ -35,7 +40,6 @@ $images = mysqli_fetch_all($results, MYSQLI_ASSOC);
             grid-gap: 20px;
             align-items: stretch;
             padding-bottom: 100px;
-            position: absolute;
             bottom: 0;
             right: 100px;
             left:60px;
@@ -64,7 +68,7 @@ $images = mysqli_fetch_all($results, MYSQLI_ASSOC);
 					<!-- Section -->
 						<section class="ttt">
                             
-                            <div><h1>Take a picture with ur webcam</h1></div>
+                            <div><h1>Take a picture with your webcam</h1></div>
                             <div class="cam">
                                 <div class="camera">
                                     <div class="filter">
@@ -100,12 +104,13 @@ $images = mysqli_fetch_all($results, MYSQLI_ASSOC);
                                         <li><label><input type="radio" name="alpha" value="1" onclick="func('1')" ><img style="width: 100px;" src="../img/alpha/1.png"></label></li>
                                         <li><label><input type="radio" name="alpha" value="2" onclick="func('2')" ><img style="width: 100px;" src="../img/alpha/2.png"></label></li>
                                         <li><label><input type="radio" name="alpha" value="3" onclick="func('3')" ><img style="width: 100px;" src="../img/alpha/3.png"></label></li></br>
-                                        <li><label><input type="radio" name="alpha" value="4" onclick="func('4')" >Nothing</label></li>
+                                        <li><label><input type="radio" name="alpha" value="4" onclick="func('4')"  >Nothing</label></li>
                                     </ul>
                                 </div>
                                 <div class="upl">
                                     <h1>Or upload a img</h1>
-                                    <input class="btn btn-info" type="file" id='upload' onClick='clear_img()' name="webcam" accept="image/*">
+                                    <input class="btn btn-info" type="file" id='upload' onClick='clear_img()' name="webcam" accept="image/*"> <br>
+                                    <img id="blah" src="#" width="350px" height="300px" />
                                 </div>
                                 <input type=button id="pub" name='publish' value="Publish" onClick="post()" id ="pub" disabled><br>
                             </form>
@@ -128,7 +133,23 @@ $images = mysqli_fetch_all($results, MYSQLI_ASSOC);
                     <?php include("../includes/footer.html"); ?>
 				</section>
 		</div>
+        <script>
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
 
+                    reader.onload = function (e) {
+                        $('#blah').attr('src', e.target.result);
+                    }
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+            $("#upload").change(function(){
+                readURL(this);
+            });
+        </script>
 	</body>
 </html>
 
@@ -228,13 +249,15 @@ $images = mysqli_fetch_all($results, MYSQLI_ASSOC);
         if(s == '0')
         {
             alert("you have to select a filter");
+            location.reload();
             return;
         }
 
         if (document.getElementById("upload").files.length == 0)
         {
             Webcam.upload( img, '../controller/save_pic.php?sup='+ s, function(code, text) {
-                alert("your img have been successfully  posted");
+                alert("your image have been successfully  posted");
+                window.location.replace("../view/gallery.php");
             } );
         }
         
@@ -253,5 +276,4 @@ $images = mysqli_fetch_all($results, MYSQLI_ASSOC);
         document.getElementById('22').style.width = "0px";
         document.getElementById('33').style.width = "0px";
     }
-
 </script>

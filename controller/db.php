@@ -12,7 +12,7 @@ function add_user($user, $email, $passwd, $random)
 }
 
 
-function send_mail($user, $email, $passwd, $random)
+function send_mail($user, $email, $passwd, $random, $url)
 {
     $to = $email;
     $subject = 'Signup | Verification';
@@ -23,14 +23,14 @@ function send_mail($user, $email, $passwd, $random)
     Username: " . $user . "<br>
     --------------------------<br>
     Please click this link to activate ur account:<br>
-    <a href='http://10.12.5.8/camagru/controller/verify.php?user=" .$user. "&email=" .$email. "&random=" .$random. "' target='_blank'> verify </a>";
+    <a href='http://".$url."/camagru/controller/verify.php?user=" .$user. "&email=" .$email. "&random=" .$random. "' target='_blank'> verify </a>";
     $headers = "From:noreply@camagru \r\n";
     $headers .= "MIME-Version: 1.0" . "\r\n";
     $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
     mail($to, $subject, $message, $headers);
 }
 
-function send_mail1($user, $email)
+function send_mail1($user, $email, $url)
 {
     $to = $email;
     $subject = 'email | Verification';
@@ -41,14 +41,14 @@ function send_mail1($user, $email)
     Username: " . $user . "<br>
     --------------------------<br>
     Please click this link to activate ur account:<br>
-    <a href='http://10.12.5.8/camagru/controller/verify.php?user=" .$user. "&email=" .$email. "' target='_blank'> verify </a>";
+    <a href='http://".$url."/camagru/controller/verify.php?user=" .$user. "&email=" .$email. "' target='_blank'> verify </a>";
     $headers = "From:noreply@camagru \r\n";
     $headers .= "MIME-Version: 1.0" . "\r\n";
     $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
     mail($to, $subject, $message, $headers);
 }
 
-function send_mail_cmnt($user, $email, $sender, $img)
+function send_mail_cmnt($user, $email, $sender, $img, $url)
 {
     $to = $email;
     $subject = "'$sender' comment ur post";
@@ -57,7 +57,7 @@ function send_mail_cmnt($user, $email, $sender, $img)
     u receiver a comnt from '$sender' !
     u can check it from the link<br>
     --------------------------<br>
-    <a href='http://10.12.5.8/camagru/view/comments.php?imageid=" .$img. "' target='_blank'> check my post </a><br>
+    <a href='http://".$url."/camagru/view/comments.php?imageid=" .$img. "' target='_blank'> check my post </a><br>
     --------------------------<br>";
     $headers = "From:noreply@camagru \r\n";
     $headers .= "MIME-Version: 1.0" . "\r\n";

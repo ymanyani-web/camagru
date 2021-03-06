@@ -12,7 +12,7 @@ else
     header('Location: gallery.php'); 
 ?>
 <?php
-$db = mysqli_connect('database', 'root', 'tiger', 'camagru');
+include     '../controller/connect_db.php';
 $results = mysqli_query($db, "SELECT * FROM images WHERE username='$s' ORDER BY id DESC");
 $images = mysqli_fetch_all($results, MYSQLI_ASSOC);
 ?>

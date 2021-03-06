@@ -4,7 +4,8 @@ if($_POST['username'] && $_POST['email'] && $_POST['passwd'])
     $user = trim(strtolower($_POST['username']));
     $email = trim($_POST['email']);
     $passwd = sha1($_POST['passwd']);
-    $db = mysqli_connect('database', 'root', 'tiger', 'camagru');
+    $url = $_POST['url'];
+    include     'connect_db.php';
     $sql_u = "SELECT * FROM users WHERE username='$user'";
   	$sql_e = "SELECT * FROM users WHERE email='$email'";
   	$res_u = mysqli_query($db, $sql_u);
@@ -30,7 +31,7 @@ if($_POST['username'] && $_POST['email'] && $_POST['passwd'])
         require('db.php');
         $random = rand(1000,9000);
         add_user($user, $email, $passwd, $random);
-        send_mail($user, $email, $passwd, $random);
+        send_mail($user, $email, $passwd, $random, $url);
         $msg = 'check ur email for verification before log in';
         require('../view/sign-in.php');
     }

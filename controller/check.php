@@ -6,7 +6,7 @@ $_SESSION['user'] = strtolower(htmlspecialchars($_POST['username']));
 <?php
 if ($_POST['username'] && $_POST['passwd'])
 {
-    $user = strtolower($_POST['username']);
+    $user = strtolower(htmlspecialchars($_POST['username']));
     $passwd = sha1(htmlspecialchars($_POST['passwd']));
     require('db.php');
     if(check_user($user, $passwd) == "good")
@@ -16,7 +16,7 @@ if ($_POST['username'] && $_POST['passwd'])
     elseif(check_user($user, $passwd) == "not active")
     {
         session_destroy();
-        $msg = "ur account is not verifed, please check ur mail, then try again!";
+        $msg = "your account is not verifed, please check your mail, then try again!";
         require('../view/sign-in.php');
     }
     else
